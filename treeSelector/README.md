@@ -10,7 +10,7 @@ Dependencies
 * Bootstrap
 * Font-awesome
 
-Inject it in your angular modules like this:
+Inject it in your angular module
 
 ```JavaScript
 angular.module('myAwesomeApp', ['com.ims.treeSelector']);
