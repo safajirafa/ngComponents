@@ -1,2 +1,1 @@
-AngularJS Component library
----
+#### AngularJS Component library
