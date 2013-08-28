@@ -10,18 +10,18 @@ Dependencies
 * Bootstrap
 * Font-awesome
 
-Inject it in your angular module
 ```JavaScript
+// Inject it in your angular module
 angular.module('myAwesomeApp', ['com.ims.treeSelector']);
 ```
 
-Add the directive in your html
 ```html
+<!-- Add the directive to your html -->
 <div tree-selector context="FOO" config="myConfigObj"></div>
 ```
 
-Add a configuration object to the controller
 ```JavaScript
+// Add a configuration object to the controller
 $scope.myConfigObj = {
   label: 'Alignment',
   icon: 'icon-chevron-sign-right',
