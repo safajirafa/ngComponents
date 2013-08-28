@@ -1,0 +1,16 @@
+<span>
+    <span class="label label-success">Current selection: {{config.activeKey || 'not initialized'}}</span>
+    <br />
+    <label>{{config.label}}</label>
+    <br />
+    <button class="btn btn-primary" ng-class="{false: 'disabled'}[config.enabled]" ng-click="togglePopover()">
+        <i class="{{config.icon}}"></i>
+        <span>&nbsp;{{config.activeTitle}}&nbsp;</span>
+        <i class="icon-caret-down"></i>
+    </button>
+    <div class="popover-container" ng-show="displayPopover == true" tabindex="-1">
+        <ul class="list-unstyled">
+            <li ng-repeat="item in config.itemArray" ng-include="'item.tmpl.html'"></li>
+        </ul>
+    </div>
+</span>
