@@ -87,6 +87,7 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices) {
 			document.addEventListener('change', function(e) {
 				// match the input name <input type="radio" name="objName" />
 				if(e.target.name === scope.config.label) {
+                    // inform angular about changes outside the framework
 					scope.$apply(function() {
 						// set new title
 						scope.config.activeTitle = e.target.parentElement.querySelector('span').textContent;
