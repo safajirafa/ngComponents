@@ -8,7 +8,7 @@
         <span>&nbsp;{{config.activeTitle}}&nbsp;</span>
         <i class="icon-caret-down"></i>
     </button>
-    <div class="popover-container" ng-show="displayPopover == true" tabindex="-1">
+    <div class="popover-container" ng-show="displayPopover == true" tabindex="0">
         <ul class="list-unstyled">
             <li ng-repeat="item in config.itemArray" ng-include="'item.tmpl.html'"></li>
         </ul>
