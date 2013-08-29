@@ -1,7 +1,7 @@
 /**
  * @directive: treeSelector
 */
-IMSTreeSelector.directive('treeSelector', function (selectorServices) {
+IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) {
 	'use strict';
 
 	return {
@@ -33,7 +33,6 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices) {
 					// if is closed then open it
 					scope.openPopover();
 				}
-				//scope.displayPopover = !scope.displayPopover;
 			};
 
 			// hide popover
@@ -44,6 +43,11 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices) {
 			// show popover
 			scope.openPopover = function () {
 				scope.displayPopover = true;
+
+				// set focus on the container div
+				$timeout(function() {
+					iElement.find('.popover-container')[0].focus();
+				},0);
 			};
 
 			// enable selector
