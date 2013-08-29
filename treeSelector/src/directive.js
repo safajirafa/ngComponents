@@ -1,7 +1,8 @@
 /**
  * @directive: treeSelector
 */
-IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) {
+/* global IMSTreeSelector */
+IMSTreeSelector.directive('treeSelector', function (selectorServices) {
 	'use strict';
 
 	return {
@@ -43,11 +44,6 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 			// show popover
 			scope.openPopover = function () {
 				scope.displayPopover = true;
-
-				// set focus on the container div
-				$timeout(function() {
-					iElement.find('.popover-container')[0].focus();
-				},0);
 			};
 
 			// enable selector
@@ -88,13 +84,15 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 			});
 
 			// Register a custom event that listens to the radio group change event
-			$(document).on('change', 'input[name="'+ scope.config.label +'"]', function () {
+			$(document).on('change', 'input[name="'+ scope.config.label +'"]', function (event) {
+
+				var $currentTarget = iElement.find(event.currentTarget);
 
 				// new title value
-				var newTitle = $(this).siblings('span').text();
+				var newTitle = $currentTarget.siblings('span').text();
 
 				// new key value
-				var newKey = $(this).val();
+				var newKey = $currentTarget.val();
 
 				// inform angular of changes outside the framework
 				scope.$apply(function () {
@@ -102,13 +100,6 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 					scope.config.activeKey = newKey;
 
 					// close popover after selection
-					scope.closePopover();
-				});
-			});
-
-			// when the popover loses focus, close it
-			iElement.find('.popover-container').on('focusout', function() {
-				scope.$apply(function() {
 					scope.closePopover();
 				});
 			});

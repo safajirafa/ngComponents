@@ -22,21 +22,36 @@ module.exports = function(grunt) {
 			js: {
 				// uglify output directives file
 				files: [
-					{ src: ['src/module.js', 'src/service.js', 'src/directive.js'], dest: 'build/treeSelector.min.js' }
+					{ src: ['src/module.js','src/directive.js','src/service.js'], dest: 'build/treeSelector.min.js' }
 				]
 			}
-		}
+		},
+		
+		htmlmin: {
+            options: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeAttributeQuotes: true
+            },
+            dest: {
+                files: {
+                    'src/tmpl/_item.min.html' : 'src/tmpl/_item.html',
+                    'src/tmpl/_treeSelector.min.html' : 'src/tmpl/_treeSelector.html'
+                }
+            }
+        }
 
 	});
 
 	// Load the plugins
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
 	// Default task(s)
 	grunt.registerTask('default', ['jshint','uglify']);
 
 	// custom task(s)
-	grunt.registerTask('checkMyCrappyJS', ['jshint']);
 	grunt.registerTask('minify', ['uglify']);
+	grunt.registerTask('minifyhtml', ['htmlmin']);
 };

@@ -1,6 +1,7 @@
 /**
  * @module: IMS Tree selector
 */
+/* global angular */
 var IMSTreeSelector = angular.module('com.ims.treeSelector', []);
 
 // inject templates
