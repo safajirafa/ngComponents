@@ -58,7 +58,7 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 			// disable selector
 			scope.disableSelector = function () {
 				scope.config.enabled = false;
-			}
+			};
 
 			// watch for changes on item array
 			scope.$watch('config.itemArray', function (newVal, oldVal) {
@@ -98,11 +98,11 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 
 				// inform angular of changes outside the framework
 				scope.$apply(function () {
-				   scope.config.activeTitle = newTitle;
-				   scope.config.activeKey = newKey;
+					scope.config.activeTitle = newTitle;
+					scope.config.activeKey = newKey;
 
-				   // close popover after selection
-				   scope.closePopover();
+					// close popover after selection
+					scope.closePopover();
 				});
 			});
 
