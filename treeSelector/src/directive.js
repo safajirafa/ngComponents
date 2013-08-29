@@ -2,7 +2,7 @@
  * @directive: treeSelector
 */
 /* global IMSTreeSelector */
-IMSTreeSelector.directive('treeSelector', function (selectorServices) {
+IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) {
 	'use strict';
 
 	return {
@@ -56,6 +56,12 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices) {
 				scope.config.enabled = false;
 			};
 
+			// selects the first/default item in the itemArray
+			scope.selectDefaultItem = function () {
+				// find the element and click it!
+				document.querySelector('input[name="'+ scope.config.label +'"]').click();
+			};
+
 			// watch for changes on item array
 			scope.$watch('config.itemArray', function (newVal, oldVal) {
 				scope.itemArrayLoaded = (newVal.length > 0) ? true : false ;
@@ -65,6 +71,10 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices) {
 			scope.$watch('itemArrayLoaded', function (newVal, oldVal) {
 				if(newVal === true) {
 					scope.enableSelector();
+
+					$timeout(function() {
+						scope.selectDefaultItem();
+					}, 800);
 				}
 			});
 
@@ -83,13 +93,12 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices) {
 				scope.config.itemArray = itemArray;
 			});
 
-			// listen for change event that matches the radio group
+			// add native js event listener
 			document.addEventListener('change', function(e) {
 				// match the input name <input type="radio" name="objName" />
 				if(e.target.name === scope.config.label) {
-                    // inform angular about changes outside the framework
 					scope.$apply(function() {
-						// set new title
+						// set new title which is in the adjacent
 						scope.config.activeTitle = e.target.parentElement.querySelector('span').textContent;
 
 						// find and set the text in the span sibling
