@@ -83,25 +83,20 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices) {
 				scope.config.itemArray = itemArray;
 			});
 
-			// Register a custom event that listens to the radio group change event
-			$(document).on('change', 'input[name="'+ scope.config.label +'"]', function (event) {
+			// listen for change event that matches the radio group
+			document.addEventListener('change', function(e) {
+				// match the input name <input type="radio" name="objName" />
+				if(e.target.name === scope.config.label) {
+					scope.$apply(function() {
+						// set new title
+						scope.config.activeTitle = e.target.parentElement.querySelector('span').textContent;
 
-				var $currentTarget = iElement.find(event.currentTarget);
+						// find and set the text in the span sibling
+						scope.config.activeKey = e.target.value;
 
-				// new title value
-				var newTitle = $currentTarget.siblings('span').text();
-
-				// new key value
-				var newKey = $currentTarget.val();
-
-				// inform angular of changes outside the framework
-				scope.$apply(function () {
-					scope.config.activeTitle = newTitle;
-					scope.config.activeKey = newKey;
-
-					// close popover after selection
-					scope.closePopover();
-				});
+						scope.closePopover();
+					});
+				}
 			});
 		}
 	};
