@@ -15,7 +15,14 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 		templateUrl: 'treeSelector.tmpl.html',
 		link: function(scope, iElement, iAttrs) {
 
-			// Indicates that the item array with the nodes is loaded
+			if(!scope.config) {
+				throw new Error('Directive has no configuration object');
+			}
+
+			// A raw reference to the DOM element
+			var _rawDOMElement = iElement[0];
+
+			// Indicates that the item array is loaded with nodes
 			scope.itemArrayLoaded = false;
 
 			// the popover is not displayed by default
@@ -65,7 +72,7 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 			// watch for changes on item array
 			scope.$watch('config.itemArray', function (newVal, oldVal) {
 				scope.itemArrayLoaded = (newVal.length > 0) ? true : false ;
-			});
+			}, true);
 
 			// watch for itemArrayLoaded changes
 			scope.$watch('itemArrayLoaded', function (newVal, oldVal) {
@@ -74,7 +81,7 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 
 					$timeout(function() {
 						scope.selectDefaultItem();
-					}, 800);
+					}, 0);
 				}
 			});
 
@@ -83,23 +90,17 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 
 				// if not enabled, the popover should not be visible
 				if(newVal === false) {
-					scope.config.activeTitle = scope.config.label;
 					scope.closePopover();
 				}
 			});
 
-			// call service to get data
-			selectorServices.getItemArray(scope.config).then(function (itemArray) {
-				scope.config.itemArray = itemArray;
-			});
-
-			// add native js event listener
-			document.addEventListener('change', function(e) {
+			// add native js event listener to changes on the radio group
+			_rawDOMElement.addEventListener('change', function(e) {
 				// match the input name <input type="radio" name="objName" />
 				if(e.target.name === scope.config.label) {
 					scope.$apply(function() {
-						// set new title which is in the adjacent
-						scope.config.activeTitle = e.target.parentElement.querySelector('span').textContent;
+						// the active title text is in the next sibling
+						scope.config.activeTitle = e.target.nextElementSibling.textContent;
 
 						// find and set the text in the span sibling
 						scope.config.activeKey = e.target.value;
@@ -107,6 +108,35 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 						scope.closePopover();
 					});
 				}
+			});
+
+			// angular custom listener to (re)load the selector from outside the directive
+			// the event should be called "load_selector_[your_selector_name]"
+			var loadEventName = 'load_selector_' + iAttrs.config;
+			scope.$on(loadEventName, function(event, args) {
+
+				scope.disableSelector();
+
+				// clear the current activeKey
+				scope.config.activeKey = '';
+
+				// display a loading msg while fetching data from service
+				scope.config.activeTitle = scope.config.loadingText || 'Loading...';
+
+				// flush the item array
+				scope.config.itemArray.length = 0;
+
+				if(!scope.context) {
+					throw new Error('Scope not set for ' + iAttrs.config + ' directive');
+				}
+
+				// add the context to the resource config
+				scope.config.resource.context = scope.context;
+
+				// call service to get data
+				selectorServices.getItemArray(scope.config.resource).then(function (itemArray) {
+					scope.config.itemArray = itemArray;
+				});
 			});
 		}
 	};

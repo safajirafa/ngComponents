@@ -1,85 +1,86 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>Treeview Selector</title>
-    <meta charset="utf-8">
+	<head>
+		<title>Treeview Selector</title>
+		<meta charset="utf-8">
 
-    <!-- bootstrap css -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+		<!-- bootstrap css -->
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Fontawesome -->
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+		<!-- Fontawesome -->
+		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 
-    <style>
-        .container {
-            margin-top: 30px;
-        }
+		<style>
+			.container {
+				margin-top: 30px;
+			}
 
-        .popover-container {
-            position: absolute;
-            background-color: #FFF;
-            border: 1px solid #CCC;
-            padding: 1em;
-            max-height: 400px;
-            min-width: 240px;
-            overflow: auto;
-            margin-top: 1px;
-            border-radius: 4px;
-            z-index: 1;
-            -webkit-overflow-scrolling: touch;
-        }
+			.popover-container {
+				position: absolute;
+				background-color: #FFF;
+				border: 1px solid #CCC;
+				padding: 1em;
+				max-height: 400px;
+				min-width: 240px;
+				overflow: auto;
+				margin-top: 1px;
+				border-radius: 4px;
+				z-index: 1;
+				-webkit-overflow-scrolling: touch;
+			}
 
-    </style>
-  </head>
+		</style>
+	</head>
 
-  <body ng-app="Dashboard" ng-cloak>
+	<body ng-app="Dashboard" ng-cloak>
 
-    <div ng-controller="myViewCtrl" class="container">
+		<div ng-controller="myViewCtrl" class="container">
 
-        <div class="well">
-            <ul class="list-inline">
-                <li>
-                    <!-- alignment component -->
-                    <div tree-selector context="PRX" config="alignment"></div>
-                </li>
-                <li>
-                    <!-- geo component -->
-                    <div tree-selector context="PRX" config="geo"></div>
-                </li>
-                <li>
-                    <!-- time period component -->
-                    <div tree-selector context="PRX" config="timePeriod"></div>
-                </li>
-                <li>
-                    <!-- metric component -->
-                    <div tree-selector context="PRX" config="metric"></div>
-                </li>
-            </ul>
-        </div>
+			<div class="well">
+				<ul class="list-inline">
+					<li>
+						<!-- alignment component -->
+						<tree-selector context="PRX" config="alignment"></tree-selector>
+					</li>
+					<li>
+						<!-- geo component -->
+						<tree-selector context="PRX" config="geo"></tree-selector>
+					</li>
+					<li>
+						<!-- time period component -->
+						<tree-selector context="PRX" config="timePeriod"></tree-selector>
+					</li>
+					<li>
+						<!-- metric component -->
+						<tree-selector context="PRX" config="metric"></tree-selector>
+					</li>
+				</ul>
+			</div>
 
-        <div class="well">
-            <h5>Current selection</h5>
-            <ul class="list-group">
-                <li class="list-group-item"><strong>Alignment</strong> {{alignment.activeTitle}}</li>
-                <li class="list-group-item"><strong>Geo</strong> {{geo.activeTitle}}</li>
-                <li class="list-group-item"><strong>Time period</strong> {{timePeriod.activeTitle}}</li>
-                <li class="list-group-item"><strong>Metric</strong> {{metric.activeTitle}}</li>
-            </ul>
-        </div>
+			<div class="well">
+				<h5>Current selection</h5>
+				<ul class="list-group">
+					<li class="list-group-item"><strong>Alignment</strong> {{alignment.activeTitle}}</li>
+					<li class="list-group-item"><strong>Geo</strong> {{geo.activeTitle}}</li>
+					<li class="list-group-item"><strong>Time period</strong> {{timePeriod.activeTitle}}</li>
+					<li class="list-group-item"><strong>Metric</strong> {{metric.activeTitle}}</li>
+				</ul>
+			</div>
 
-    </div>
+		</div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+		<!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script-->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 
-    <script src="app.js"></script>
+		<script src="app.js"></script>
 
-    <!-- <script src="../../build/treeSelector.min.js"></script> -->
-    <script src="../../src/module.js"></script>
-    <script src="../../src/service.js"></script>
-    <script src="../../src/directive.js"></script>
+		<!--script src="../../build/treeSelector.min.js"></script-->
 
-  </body>
+		<script src="../../src/module.js"></script>
+		<script src="../../src/service.js"></script>
+		<script src="../../src/directive.js"></script>
+
+	</body>
 
 </html>
