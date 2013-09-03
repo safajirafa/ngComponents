@@ -25,10 +25,13 @@ angular.module('myAwesomeApp', ['com.ims.treeSelector']);
 $scope.myConfigObj = {
   label: 'Alignment',
   icon: 'icon-chevron-sign-right',
-  resourceUrl: '/services/alignments',
   itemArray: [],
   activeKey: '',
-  activeTitle: 'Loading...'
+  activeTitle: 'Loading...',
+  resource: {
+    url: '/services/alignments',
+    params: {}
+  },
 };
 ```
 
