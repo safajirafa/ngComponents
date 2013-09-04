@@ -13,7 +13,7 @@ angular.module('Dashboard', ['com.ims.treeSelector'])
 		resource: {
 			url: '/services/alignments',
 			params: {}
-		},
+		}
 	};
 
 	// Geo selector
@@ -26,7 +26,7 @@ angular.module('Dashboard', ['com.ims.treeSelector'])
 		resource: {
 			url: '/services/geos',
 			params: {}
-		},
+		}
 	};
 
 	// Time period selector
@@ -39,7 +39,7 @@ angular.module('Dashboard', ['com.ims.treeSelector'])
 		resource: {
 			url: '/services/timePeriods',
 			params: {}
-		},
+		}
 	};
 
 	// metric selector
@@ -52,7 +52,7 @@ angular.module('Dashboard', ['com.ims.treeSelector'])
 		resource: {
 			url: '/services/metrics',
 			params: {}
-		},
+		}
 	};
 
 	// Kick off dashboard initial load
@@ -93,7 +93,7 @@ angular.module('Dashboard', ['com.ims.treeSelector'])
 
 		// TODO filters are ready at this point
 		// emit event to reload charts and grids...
-		console.log('Filters are ready, (re)load charts and grids %o', newVal);
+		//console.log('Filters are ready, (re)load charts and grids %o', newVal);
 
 	}, true);
 

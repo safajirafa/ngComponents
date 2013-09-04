@@ -20,7 +20,7 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 			}
 
 			// A raw reference to the DOM element
-			var _rawDOMElement = iElement[0];
+			var _rawDOMContainer = iElement[0];
 
 			// Indicates that the item array is loaded with nodes
 			scope.itemArrayLoaded = false;
@@ -28,7 +28,7 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 			// the popover is not displayed by default
 			scope.displayPopover = false;
 
-			// by default the selector is not enable until we get data from server
+			// by default the selector is not enable until we get data from the service
 			scope.config.enabled = false;
 
 			// toggle popover
@@ -95,7 +95,7 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 			});
 
 			// add native js event listener to changes on the radio group
-			_rawDOMElement.addEventListener('change', function(e) {
+			_rawDOMContainer.addEventListener('change', function(e) {
 				// match the input name <input type="radio" name="objName" />
 				if(e.target.name === scope.config.label) {
 					scope.$apply(function() {
@@ -137,6 +137,39 @@ IMSTreeSelector.directive('treeSelector', function (selectorServices, $timeout) 
 				selectorServices.getItemArray(scope.config.resource).then(function (itemArray) {
 					scope.config.itemArray = itemArray;
 				});
+			});
+
+			// add listener to handle the list toggle
+			_rawDOMContainer.addEventListener('click', function(e) {
+				// match the event triggered from elements with class "node-toggler"
+				if(e.target.className.match(/\bnode-toggler\b/)) {
+
+					// check the current status of the node-toggler
+					var displayChildrenLists = (e.target.className.match(/\bicon-expand\b/)) ? true : false;
+
+					// get the all the children ul(s) of the closest clicked element
+					var elementCollection = e.target.parentElement.parentElement.children;
+
+					for (var i=0; i < elementCollection.length; i++) {
+						if (elementCollection[i].nodeName === 'UL') {
+
+							if (displayChildrenLists) {
+								elementCollection[i].style.display = 'block';
+
+								// change the class (IE10+)
+								e.target.classList.remove('icon-expand');
+								e.target.classList.add('icon-collapse');
+							}
+							else {
+								elementCollection[i].style.display = 'none';
+
+								// change the class (IE10+)
+								e.target.classList.remove('icon-collapse');
+								e.target.classList.add('icon-expand');
+							}
+						}
+					}
+				}
 			});
 		}
 	};
