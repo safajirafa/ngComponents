@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>IMS</title>
+
+	<meta charset="utf-8">
+
+	<!-- bootstrap css -->
+	<link rel="stylesheet" href="../bower_components/bootstrap-css/css/bootstrap.min.css">
+
+	<!-- Fontawesome -->
+	<link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+	<style>
+		.com-preferred-view .popover-container {
+			border: 1px solid #CCC;
+			background-color: #F0F0F0;
+			border-radius: 4px;
+			padding-top: 20px;
+			margin-top: 1px;
+			width: 420px;
+			max-height: 400px;
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;
+			position: absolute;
+			z-index: 1;
+		}
+		.com-preferred-view table td { vertical-align: middle; }
+	</style>
+</head>
+<body ng-app="Dashboard" ng-cloak>
+
+	<div ng-controller="myViewCtrl" class="container">
+
+		<h4>Component Demo: Preferred View</h4>
+		<div preferred-view btn-label="My preferred views" on-saving="getPreferredViewObj()" on-restore="restorePreferredView(selectedKeys)"></div>
+
+	</div>
+
+	<script src="../bower_components/jquery/jquery.min.js"></script>
+	<script src="../bower_components/angular/angular.min.js"></script>
+	<script src="../bower_components/angular-mocks/angular-mocks.js"></script>
+
+	<script src="demoApp.js"></script>
+	<script src="../build/preferredView.min.js"></script>
+</body>
+</html>

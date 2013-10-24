@@ -1,0 +1,24 @@
+{
+  "name": "IMSPreferredView",
+  "version": "1.0.0",
+  "description": "IMS component for saving/restoring a preferred selection of filters in a view",
+  "main": "",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-uglify": "~0.2.2"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "repository": "",
+  "keywords": [
+    "IMS"
+  ],
+  "author": "avalencia",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}

@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		
+
 		htmlmin: {
             options: {
                 collapseWhitespace: true,
@@ -53,5 +53,6 @@ module.exports = function(grunt) {
 
 	// custom task(s)
 	grunt.registerTask('minify', ['uglify']);
+	grunt.registerTask('checkMyCrappyJS', ['jshint']);
 	grunt.registerTask('minifyhtml', ['htmlmin']);
 };

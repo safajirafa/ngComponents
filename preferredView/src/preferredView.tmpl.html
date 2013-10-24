@@ -1,0 +1,29 @@
+<div class="com-preferred-view">
+	<!-- popover toggler -->
+	<button class="btn" ng-click="togglePopover()">{{btnLabel}}</button>
+	<!-- popover container -->
+	<div class="popover-container" ng-show="showPopover">
+		<div class="span5">
+			<div class="input-append">
+				<input placeholder="save current view as..." type="text" ng-model="preferredViewTitle" class="span4" maxlength="58" ng-trim="true">
+				<button class="btn btn-info" ng-click="savePreferredView()" ng-disabled="preferredViewTitle.length < 3">Save</button>
+			</div>
+		</div>
+		<table class="table">
+			<tbody>
+				<thead ng-show="preferredViews.length > 0">
+					<th>&nbsp;</th>
+					<th>Filter Name</th>
+					<th>Creation date</th>
+					<th>&nbsp;</th>
+				</thead>
+				<tr ng-repeat="pv in preferredViews | orderBy:pv.timestamp">
+					<td><button class="btn btn-success" ng-click="restorePreferredView($event)" data-keys="{{pv.selectedKeys}}"><i class="icon-play"></i></button></td>
+					<td>{{pv.title}}</td>
+					<td>{{pv.timestamp | date:"short"}}</td>
+					<td><button class="btn btn-danger" ng-click="deletePreferredView($event)" data-guid="{{pv.guid}}" data-view-name="{{pv.viewName}}"><i class="icon-remove"></i></button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -3,13 +3,6 @@ Tree selector (alpha)
 
 > AngularJS component that supports multi-level lists and single item selection
 
-Dependencies
-===
-* jQuery
-* AngularJS
-* Bootstrap
-* Font-awesome
-
 ```JavaScript
 // Inject it in your angular module
 angular.module('myAwesomeApp', ['com.ims.treeSelector']);
@@ -25,13 +18,10 @@ angular.module('myAwesomeApp', ['com.ims.treeSelector']);
 $scope.myConfigObj = {
   label: 'Alignment',
   icon: 'icon-chevron-sign-right',
+  resourceUrl: '/services/alignments',
   itemArray: [],
   activeKey: '',
-  activeTitle: 'Loading...',
-  resource: {
-    url: '/services/alignments',
-    params: {}
-  },
+  activeTitle: 'Loading...'
 };
 ```
 
